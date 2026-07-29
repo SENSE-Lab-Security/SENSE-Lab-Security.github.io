@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="SENSE Lab at HKUST(GZ) advances security and privacy for emerging AI, sensing, and cyber-physical systems.">
+    <meta name="theme-color" content="#05090d">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="SENSE Lab">
+    <meta property="og:title" content="SENSE Lab | Security Exploration of Novel Systems and Exploits">
+    <meta property="og:description"
+        content="Advancing secure and privacy-preserving sensing and computation for emerging AI and cyber-physical technologies.">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="SENSE Lab | Security Exploration of Novel Systems and Exploits">
+    <meta name="twitter:description"
+        content="Advancing secure and privacy-preserving sensing and computation for emerging AI and cyber-physical technologies.">
+    <title>SENSE Lab | Security Exploration of Novel Systems and Exploits</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --font-body: 'Space Grotesk', sans-serif;
+            --font-heading: 'Space Grotesk', sans-serif;
+            --font-display: 'JetBrains Mono', monospace;
+            --font-mono: 'JetBrains Mono', monospace;
+            --bg-main: #05090d;
+            --bg-surface: #0a1218;
+            --bg-soft: #081016;
+            --ink-primary: #eafff8;
+            --ink-secondary: #9db9b0;
+            --line: rgba(66, 255, 190, 0.18);
+            --accent: #42ffbe;
+            --accent-soft: rgba(66, 255, 190, 0.1);
+            --warm: #d8ff54;
+            --cyan: #35d9ff;
+            --button-ink: #04100c;
+            --venue-ink: #ffffff;
+            --header-bg: rgba(5, 9, 13, 0.88);
+            --hero-bg: linear-gradient(105deg, #020508 0%, #07131a 48%, #071923 100%);
+            --body-bg:
+                linear-gradient(rgba(66, 255, 190, 0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(66, 255, 190, 0.025) 1px, transparent 1px),
+                radial-gradient(1100px 500px at 6% -8%, rgba(40, 231, 165, 0.09), transparent 62%),
+                radial-gradient(900px 420px at 94% 6%, rgba(53, 217, 255, 0.08), transparent 64%),
+                var(--bg-main);
+            --hero-overlay:
+                linear-gradient(rgba(66, 255, 190, 0.07) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(66, 255, 190, 0.07) 1px, transparent 1px),
+                radial-gradient(circle at 50% 70%, rgba(66, 255, 190, 0.18), transparent 38%),
+                radial-gradient(circle at 88% -5%, rgba(53, 217, 255, 0.18), transparent 36%);
+            --ghost-color: rgba(66, 255, 190, 0.24);
+            --hero-lab-gradient: linear-gradient(100deg, #eafff8 0%, #42ffbe 52%, #35d9ff 100%);
+            --hero-lab-shadow: 0 0 26px rgba(66, 255, 190, 0.28);
+            --shadow-soft: 0 18px 42px rgba(0, 0, 0, 0.38), 0 0 0 1px rgba(66, 255, 190, 0.035);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--body-bg);
+            background-size: 48px 48px, 48px 48px, auto, auto, auto;
+            color: var(--ink-secondary);
+            min-height: 100vh;
+        }
+
+        h1,
+        h2,
+        h3,
+        .lab-brand {
+            font-family: var(--font-heading);
+            color: var(--ink-primary);
+            letter-spacing: -0.025em;
+        }
+
+        section {
+            scroll-margin-top: 84px;
+        }
+
+        .site-header {
+            background: var(--header-bg);
+            border-bottom: 1px solid var(--line);
+            backdrop-filter: blur(18px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.24);
+        }
+
+        .section-shell {
+            position: relative;
+            border-top: 1px solid rgba(66, 255, 190, 0.04);
+        }
+
+        .section-shell.soft {
+            background:
+                linear-gradient(135deg, rgba(66, 255, 190, 0.025), transparent 35%),
+                rgba(8, 16, 22, 0.72);
+        }
+
+        .hero-bg {
+            position: relative;
+            overflow: hidden;
+            background: var(--hero-bg);
+        }
+
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: var(--hero-overlay);
+            background-size: 54px 54px, 54px 54px, auto, auto;
+            mask-image: linear-gradient(to bottom, black, rgba(0, 0, 0, 0.35));
+        }
+
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            opacity: 1;
+            pointer-events: none;
+            background: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.014) 0, rgba(255, 255, 255, 0.014) 1px, transparent 1px, transparent 4px);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title-wrap {
+            position: relative;
+            display: inline-block;
+            width: fit-content;
+            padding-inline: 0.35rem;
+        }
+
+        .hero-main-title {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            letter-spacing: -0.045em;
+            line-height: 1.02;
+            color: #f7fafc;
+            max-width: none;
+            margin-inline: auto;
+            text-wrap: balance;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-ghost {
+            position: absolute;
+            left: 50%;
+            top: 56%;
+            transform: translate(-50%, -50%);
+            width: max-content;
+            max-width: 92vw;
+            font-family: var(--font-mono);
+            font-size: clamp(0.85rem, 2vw, 1.45rem);
+            letter-spacing: 0.02em;
+            line-height: 1.1;
+            font-weight: 600;
+            color: var(--ghost-color);
+            white-space: nowrap;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .hero-lab-name {
+            font-family: var(--font-display);
+            font-size: clamp(2.2rem, 5.3vw, 4.1rem);
+            line-height: 0.88;
+            font-weight: 700;
+            letter-spacing: -0.055em;
+            color: var(--accent);
+            text-shadow: var(--hero-lab-shadow);
+            display: block;
+            line-height: 1;
+        }
+
+        @supports ((-webkit-background-clip: text) or (background-clip: text)) {
+            .hero-lab-name {
+                background: var(--hero-lab-gradient);
+                -webkit-background-clip: text;
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
+                color: transparent;
+            }
+        }
+
+        .section-title {
+            border-bottom: 1px solid var(--line);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+            text-shadow: 0 0 24px rgba(66, 255, 190, 0.1);
+        }
+
+        .nav-link {
+            color: var(--ink-secondary);
+            transition: color 0.25s ease, border-bottom-color 0.25s ease;
+            border-bottom: 2px solid transparent;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            font-family: var(--font-mono);
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--ink-primary);
+            border-bottom-color: var(--accent);
+        }
+
+        .research-card {
+            border: 1px solid var(--line);
+            box-shadow: var(--shadow-soft);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .research-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .tag {
+            background-color: var(--accent-soft);
+            color: var(--accent);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            font-family: var(--font-mono);
+        }
+
+        .publication-link {
+            color: var(--accent);
+            font-weight: 600;
+            transition: color 0.2s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .publication-link:hover {
+            color: var(--ink-primary);
+            border-bottom-color: currentColor;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: var(--button-ink);
+            font-family: var(--font-mono);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent);
+            transform: translateY(-1px);
+            box-shadow: 0 0 26px rgba(66, 255, 190, 0.24);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.14);
+            color: #f8fbff;
+            border: 1px solid rgba(255, 255, 255, 0.42);
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.7);
+        }
+
+        .filter-btn {
+            border: 1px solid var(--line);
+            color: var(--ink-secondary);
+            background: var(--bg-surface);
+            transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background-color: var(--accent);
+            color: var(--button-ink);
+            border-color: var(--accent);
+        }
+
+        .select-control {
+            border: 1px solid var(--line);
+            background: var(--bg-surface);
+            color: var(--ink-secondary);
+        }
+
+        .select-control:focus {
+            outline: 2px solid transparent;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(66, 255, 190, 0.12);
+        }
+
+        .publication-item,
+        .news-item,
+        .seminar-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--line);
+            border-radius: 0.85rem;
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.24);
+            padding: 0.85rem 0.95rem;
+            transition: border-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .publication-item:hover,
+        .news-item:hover,
+        .seminar-card:hover {
+            border-color: rgba(66, 255, 190, 0.46);
+            transform: translateY(-1px);
+        }
+
+        .publication-item.preprint {
+            border-left: 4px solid var(--accent);
+            padding-left: 0.8rem;
+        }
+
+        .publication-meta {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .publication-body {
+            min-width: 0;
+        }
+
+        .publication-actions {
+            margin-top: 0.45rem;
+        }
+
+        .pdf-action-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--line);
+            border-radius: 9999px;
+            padding: 0.18rem 0.72rem;
+            font-size: 0.82rem;
+            line-height: 1.25;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .pub-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding: 0.2rem 0.5rem;
+            border-radius: 9999px;
+            background: var(--accent-soft);
+            color: var(--cyan);
+        }
+
+        .pub-badge.type {
+            background: var(--accent-soft);
+            color: var(--accent);
+        }
+
+        .publication-award {
+            color: var(--warm);
+            font-weight: 700;
+            font-size: 0.8rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .publication-author-lab-member {
+            color: var(--accent);
+            font-weight: 700;
+            text-decoration: underline;
+            text-decoration-color: rgba(66, 255, 190, 0.32);
+            text-underline-offset: 0.16em;
+        }
+
+        .publication-venue {
+            color: var(--venue-ink);
+            font-weight: 700;
+            font-style: italic;
+        }
+
+        .publication-venue-line {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.4rem;
+            margin-top: 0.25rem;
+        }
+
+        .venue-chip {
+            display: inline-flex;
+            align-items: center;
+            border-radius: 9999px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            padding: 0.1rem 0.45rem;
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            font-style: normal;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            line-height: 1.2;
+            text-transform: uppercase;
+        }
+
+        .venue-chip.ccf {
+            color: var(--button-ink);
+            background: var(--warm);
+            border-color: rgba(216, 255, 84, 0.65);
+        }
+
+        .venue-chip.rate {
+            color: #bff7ff;
+            background: rgba(53, 217, 255, 0.08);
+            border-color: rgba(53, 217, 255, 0.28);
+        }
+
+        .news-date {
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 0.8rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .news-link {
+            color: var(--ink-primary);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s ease;
+        }
+
+        .news-link:hover {
+            border-bottom-color: currentColor;
+        }
+
+        .seminar-table {
+            width: 100%;
+            border-collapse: collapse;
+            overflow: hidden;
+        }
+
+        .seminar-table th,
+        .seminar-table td {
+            border-bottom: 1px solid var(--line);
+            padding: 0.9rem 1rem;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .seminar-table th {
+            color: var(--accent);
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .seminar-table tr:last-child td {
+            border-bottom: 0;
+        }
+
+        .seminar-date,
+        .seminar-presenter {
+            color: var(--ink-primary);
+            font-weight: 700;
+        }
+
+        .seminar-topic {
+            color: var(--ink-primary);
+        }
+
+        .seminar-venue {
+            color: var(--ink-secondary);
+            display: block;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+
+        .text-accent {
+            color: var(--accent);
+        }
+
+        .lab-brand {
+            font-family: var(--font-display);
+            color: var(--ink-primary);
+            letter-spacing: -0.08em;
+            text-shadow: 0 0 20px rgba(66, 255, 190, 0.2);
+        }
+
+        .lab-brand::before {
+            content: '>';
+            color: var(--accent);
+            margin-right: 0.18em;
+        }
+
+        .person-card {
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .person-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent) !important;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .person-detail {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .person-card img,
+        #people-container > div > img {
+            border: 2px solid rgba(66, 255, 190, 0.45);
+            box-shadow: 0 0 0 5px rgba(66, 255, 190, 0.05), 0 0 22px rgba(66, 255, 190, 0.12);
+        }
+
+        body .bg-white,
+        body .bg-white\/90,
+        body .bg-white\/95 {
+            background-color: var(--bg-surface) !important;
+        }
+
+        body .border-slate-200 {
+            border-color: var(--line) !important;
+        }
+
+        body .text-slate-500,
+        body .text-slate-600 {
+            color: var(--ink-secondary) !important;
+        }
+
+        body .hover\:bg-slate-50:hover {
+            background-color: var(--accent-soft) !important;
+        }
+
+        #mobile-menu-button {
+            color: var(--accent) !important;
+        }
+
+        footer.bg-slate-900 {
+            background: var(--bg-main) !important;
+            border-top: 1px solid var(--line);
+        }
+
+        footer .text-slate-400 {
+            color: var(--ink-secondary) !important;
+        }
+
+        select option {
+            background: var(--bg-surface);
+            color: var(--ink-primary);
+        }
+
+        ::selection {
+            color: var(--button-ink);
+            background: var(--accent);
+        }
+
+        @media (max-width: 767px) {
+            .hero-ghost {
+                opacity: 0.32;
+                top: 60%;
+                font-size: clamp(0.8rem, 4vw, 1.05rem);
+            }
+
+            .hero-main-title {
+                max-width: 14.5ch;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .publication-item {
+                display: grid;
+                grid-template-columns: 8.7rem minmax(0, 1fr) minmax(4.5rem, auto);
+                gap: 0.8rem;
+                padding: 0.95rem 1.1rem;
+            }
+
+            .publication-meta {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 0.45rem;
+            }
+
+            .publication-actions {
+                margin-top: 0;
+                display: flex;
+                justify-content: flex-end;
+                align-items: flex-start;
+            }
+
+            .news-item {
+                display: grid;
+                grid-template-columns: 7.2rem minmax(0, 1fr);
+                gap: 0.75rem;
+                align-items: start;
+            }
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <header id="header" class="site-header fixed top-0 left-0 right-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 sm:h-[4.35rem]">
+                <div class="flex-shrink-0">
+                    <a href="#home" class="lab-brand text-3xl leading-none font-semibold">SENSE Lab</a>
+                </div>
+                <div class="hidden md:block">
+                    <nav class="ml-8 flex items-baseline gap-1 lg:gap-3">
+                        <a href="#about" class="nav-link px-3 py-2 text-xs sm:text-sm uppercase">About</a>
+                        <a href="#research" class="nav-link px-3 py-2 text-xs sm:text-sm uppercase">Research</a>
+                        <a href="#people" class="nav-link px-3 py-2 text-xs sm:text-sm uppercase">People</a>
+                        <a href="#publications" class="nav-link px-3 py-2 text-xs sm:text-sm uppercase">Publications</a>
+                        <a href="#news" class="nav-link px-3 py-2 text-xs sm:text-sm uppercase">News</a>
+                        <a href="#seminar" class="nav-link px-3 py-2 text-xs sm:text-sm uppercase">Seminar</a>
+                    </nav>
+                </div>
+                <div class="-mr-1 flex md:hidden">
+                    <button id="mobile-menu-button" type="button"
+                        class="inline-flex items-center justify-center p-2 rounded-md border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-teal-900/20"
+                        aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="md:hidden hidden border-t border-slate-200 bg-white/95 shadow-lg" id="mobile-menu">
+            <div class="px-3 py-3 space-y-1">
+                <a href="#about" class="block nav-link px-3 py-2 rounded-md text-sm uppercase">About</a>
+                <a href="#research" class="block nav-link px-3 py-2 rounded-md text-sm uppercase">Research</a>
+                <a href="#people" class="block nav-link px-3 py-2 rounded-md text-sm uppercase">People</a>
+                <a href="#publications" class="block nav-link px-3 py-2 rounded-md text-sm uppercase">Publications</a>
+                <a href="#news" class="block nav-link px-3 py-2 rounded-md text-sm uppercase">News</a>
+                <a href="#seminar" class="block nav-link px-3 py-2 rounded-md text-sm uppercase">Seminar</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero-bg pt-16">
+            <div class="hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-28 md:py-36 text-white text-center">
+                <div class="hero-title-wrap mx-auto">
+                    <p class="hero-ghost">We Hack to Know How to Protect</p>
+                    <h1 class="hero-main-title text-4xl sm:text-5xl lg:text-7xl">
+                        Security Exploration of Novel Systems and Exploits
+                        <!-- <span class="block">Security Lab</span> -->
+                    </h1>
+                </div>
+                <p class="hero-lab-name mt-2 sm:mt-3">SENSE Lab</p>
+                <p class="mt-6 max-w-3xl mx-auto text-lg sm:text-xl md:text-2xl text-slate-100/90 leading-relaxed">
+                    Advancing secure and privacy-preserving sensing and computation for emerging AI and
+                    cyber-physical technologies.
+                </p>
+            </div>
+        </section>
+
+        <section id="about" class="section-shell soft py-16 sm:py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <h2 class="section-title text-4xl font-semibold tracking-tight sm:text-5xl">Our Mission</h2>
+                    <p class="mt-6 max-w-4xl mx-auto text-base sm:text-lg leading-relaxed text-slate-600">
+                        The SENSE Lab at the Hong Kong University of Science and Technology (Guangzhou) advances the
+                        science and engineering of secure and privacy-preserving sensing and computation. We protect
+                        emerging technologies such as embodied AI, the Internet of Things, and ubiquitous computing
+                        by investigating both the software and hardware stacks of computer systems. Contact us at
+                        <a href="mailto:yanlong@hkust-gz.edu.cn" class="publication-link">yanlong@hkust-gz.edu.cn</a>.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="research" class="section-shell py-16 sm:py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <h2 class="section-title text-4xl font-semibold tracking-tight sm:text-5xl">Research Directions</h2>
+                    <p class="mt-6 max-w-4xl mx-auto text-base sm:text-lg text-slate-600">
+                        Our work is organized into three synergistic research thrusts. Click on each area to explore
+                        further.
+                    </p>
+                </div>
+                <div id="research-container" class="mt-12 grid gap-6 md:grid-cols-3">
+                </div>
+            </div>
+        </section>
+
+        <section id="people" class="section-shell soft py-16 sm:py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <h2 class="section-title text-4xl font-semibold tracking-tight sm:text-5xl">Our Team</h2>
+                    <p class="mt-6 max-w-4xl mx-auto text-base sm:text-lg text-slate-600">
+                        Meet the researchers and students driving innovation at the SENSE Lab.
+                    </p>
+                </div>
+                <div class="mt-8 flex justify-center flex-wrap gap-2" id="people-filter-controls">
+                </div>
+                <div id="people-container" class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                </div>
+            </div>
+        </section>
+
+        <section id="publications" class="section-shell py-16 sm:py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <h2 class="section-title text-4xl font-semibold tracking-tight sm:text-5xl">Publications</h2>
+                </div>
+                <div class="mt-8 max-w-4xl mx-auto flex flex-col sm:flex-row gap-3">
+                    <select id="pub-year-filter" class="select-control w-full sm:w-1/2 p-2.5 rounded-md">
+                        <option value="all">All Years</option>
+                    </select>
+                    <select id="pub-area-filter" class="select-control w-full sm:w-1/2 p-2.5 rounded-md">
+                        <option value="all">All Research Areas</option>
+                    </select>
+                </div>
+                <div id="publications-container" class="mt-6 grid gap-2.5 max-w-6xl mx-auto">
+                </div>
+            </div>
+        </section>
+
+        <section id="news" class="section-shell soft py-16 sm:py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <h2 class="section-title text-4xl font-semibold tracking-tight sm:text-5xl">Latest News</h2>
+                </div>
+                <div id="news-container" class="mt-6 max-w-6xl mx-auto grid gap-2.5">
+                </div>
+            </div>
+        </section>
+
+        <section id="seminar" class="section-shell py-16 sm:py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <h2 class="section-title text-4xl font-semibold tracking-tight sm:text-5xl">Seminar</h2>
+                    <p class="mt-6 max-w-4xl mx-auto text-base sm:text-lg text-slate-600">
+                        HKUST(GZ) Security Seminar welcomes interested students and researchers to join us for
+                        discussions on systems security, AI security, sensing security, and emerging computing platforms.
+                    </p>
+                </div>
+                <div class="seminar-card mt-8 max-w-6xl mx-auto overflow-x-auto">
+                    <table class="seminar-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Date</th>
+                                <th scope="col">Presenter</th>
+                                <th scope="col">Topic</th>
+                            </tr>
+                        </thead>
+                        <tbody id="seminar-container">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-100">
+        <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-sm sm:text-base">&copy; 2026 Security Exploration of Novel Systems and Exploits (SENSE) Lab</p>
+            <p class="text-sm text-slate-400 mt-2">Hong Kong University of Science and Technology (Guangzhou)</p>
+        </div>
+    </footer>
+
+    <script src="data/research.js"></script>
+    <script src="data/people.js"></script>
+    <script src="data/publication.js"></script>
+    <script src="data/news.js"></script>
+    <script src="data/seminar.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Data is now loaded from the external files above.
+            // The large data arrays have been removed from this file.
+            const labMemberNames = new Set([...peopleData, ...alumniData].flatMap(person => [
+                `${person.firstName} ${person.lastName}`,
+                ...(person.aliases || [])
+            ]));
+
+            // Render Functions
+            function escapeHtml(value) {
+                return String(value).replace(/[&<>"']/g, char => ({
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#39;'
+                })[char]);
+            }
+
+            function normalizeAuthorName(name) {
+                return name.replace(/\*/g, '').replace(/\s+/g, ' ').trim();
+            }
+
+            function renderPublicationAuthors(authors) {
+                return authors.split(/,\s*/).map(author => {
+                    const authorName = author.trim();
+                    const escapedName = escapeHtml(authorName);
+
+                    if (labMemberNames.has(normalizeAuthorName(authorName))) {
+                        return `<strong class="publication-author-lab-member" title="SENSE Lab member">${escapedName}</strong>`;
+                    }
+
+                    return escapedName;
+                }).join(', ');
+            }
+
+            function renderResearch() {
+                const container = document.getElementById('research-container');
+                if (!container) return;
+                container.innerHTML = researchData.map(item => `
+                    <article class="research-card bg-white/95 p-6 rounded-xl cursor-pointer" data-id="${item.id}">
+                        <div class="text-3xl">${item.icon}</div>
+                        <h3 class="mt-3 text-2xl font-semibold">${item.title}</h3>
+                        <p class="mt-2 text-slate-600 leading-relaxed">${item.description}</p>
+                        <div id="subtopics-${item.id}" class="hidden mt-4 pl-4 border-l-2 border-teal-700/30">
+                            <ul class="list-disc list-inside text-slate-600 space-y-1.5 text-sm sm:text-base">
+                                ${item.subtopics.map(sub => `<li>${sub}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </article>
+                `).join('');
+            }
+
+            function renderPersonCards(people) {
+                return people.map(person => {
+                    const personFullName = person.displayName || `${person.firstName} ${person.lastName}`.trim();
+                    const personNameHtml = person.website
+                        ? `<a href="${person.website}" target="_blank" rel="noopener noreferrer" class="news-link">${personFullName}</a>`
+                        : personFullName;
+                    const detailsHtml = person.isAlumni
+                        ? `
+                            <p class="person-detail text-slate-500 text-sm" title="${person.status}">${person.status}</p>
+                            <p class="person-detail text-slate-500 text-sm" title="${person.education}">${person.education}</p>
+                        `
+                        : `
+                            <p class="person-detail text-slate-500 text-sm" title="${person.year}">${person.year}</p>
+                            <p class="person-detail text-slate-500 text-sm" title="${person.institution}">${person.institution}</p>
+                            <p class="person-detail text-slate-500 text-sm" title="${person.researchInterest}">${person.researchInterest}</p>
+                        `;
+
+                    return `
+                    <div class="person-card text-center bg-white/90 border border-slate-200 p-5 rounded-xl shadow-sm" data-role="${person.role}">
+                        <img src="${person.photo}" alt="${personFullName}" loading="lazy" decoding="async" class="w-24 h-24 rounded-full mx-auto object-cover">
+                        <h3 class="mt-3 font-semibold text-xl">${personNameHtml}</h3>
+                        <p class="text-accent font-semibold text-sm">${person.role}</p>
+                        ${detailsHtml}
+                    </div>
+                    `;
+                }).join('');
+            }
+
+            function renderCurrentPeopleGroups(filter = 'all') {
+                if (filter === 'all') {
+                    return renderPersonCards(peopleGroups.flatMap(group => group.members));
+                }
+
+                const selectedMembers = peopleGroups
+                    .filter(group => (group.filterId || group.id) === filter)
+                    .flatMap(group => group.members);
+                return renderPersonCards(selectedMembers);
+            }
+
+            function renderAlumniGroup() {
+                return `
+                    <div class="sm:col-span-2 lg:col-span-3 xl:col-span-4 pt-6 mt-3 border-t border-slate-200">
+                        <h3 class="text-2xl font-semibold text-center">Alumni</h3>
+                    </div>
+                    ${renderPersonCards(alumniData)}
+                `;
+            }
+
+            function renderPeople(filter = 'all') {
+                const container = document.getElementById('people-container');
+                if (!container) return;
+                const director = directorData;
+                const normalizedFilter = filter.toLowerCase();
+
+                const directorNameHtml = director.website
+                    ? `<a href="${director.website}" target="_blank" rel="noopener noreferrer" class="news-link">${director.displayName}</a>`
+                    : director.displayName;
+
+                const directorHtml = `
+                    <div class="sm:col-span-2 lg:col-span-3 xl:col-span-4 mb-3">
+                        <div class="flex flex-col sm:flex-row items-center bg-white/95 border border-slate-200 rounded-xl shadow-sm p-5 sm:p-6">
+                            <img src="${director.photo}" alt="${director.firstName} ${director.lastName}" loading="lazy" decoding="async" class="w-32 h-32 rounded-full object-cover flex-shrink-0">
+                            <div class="sm:ml-6 mt-4 sm:mt-0 text-center sm:text-left">
+                                <h3 class="text-2xl font-semibold">${directorNameHtml}</h3>
+                                <p class="text-accent font-semibold">${director.status}</p>
+                                <p class="text-slate-600">${director.education}</p>
+                                <p class="text-slate-600">${director.position}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                const alumniHtml = (normalizedFilter === 'all' || normalizedFilter === 'alumni')
+                    ? renderAlumniGroup()
+                    : '';
+                const currentPeopleHtml = normalizedFilter === 'alumni'
+                    ? ''
+                    : renderCurrentPeopleGroups(normalizedFilter);
+
+                container.innerHTML = directorHtml + currentPeopleHtml + alumniHtml;
+            }
+
+            function renderPeopleFilters() {
+                const controlsContainer = document.getElementById('people-filter-controls');
+                if (!controlsContainer) return;
+                const filters = [
+                    { id: 'all', label: 'All' },
+                    ...Array.from(new Map(peopleGroups.map(group => [
+                        group.filterId || group.id,
+                        { id: group.filterId || group.id, label: group.filterLabel }
+                    ])).values()),
+                    { id: 'alumni', label: 'Alumni' }
+                ];
+                controlsContainer.innerHTML = filters.map((filter, index) => `
+                    <button class="filter-btn px-4 py-1.5 rounded-full text-sm ${index === 0 ? 'active' : ''}" data-filter="${filter.id}">${filter.label}</button>
+                `).join('');
+            }
+
+            function renderPublications(yearFilter = 'all', areaFilter = 'all') {
+                const container = document.getElementById('publications-container');
+                if (!container) return;
+
+                let filteredPubs;
+                if (yearFilter === 'preprint') {
+                    filteredPubs = publicationsData.filter(pub =>
+                        pub.type === 'Preprint' &&
+                        (areaFilter === 'all' || pub.area.includes(areaFilter))
+                    );
+                } else {
+                    filteredPubs = publicationsData.filter(pub =>
+                        (yearFilter === 'all' || pub.year == yearFilter) &&
+                        (areaFilter === 'all' || pub.area.includes(areaFilter))
+                    );
+                }
+
+                if (filteredPubs.length === 0) {
+                    container.innerHTML = `<p class="text-center text-slate-500">No publications match the selected filters.</p>`;
+                    return;
+                }
+
+                container.innerHTML = filteredPubs.map(pub => {
+                    const extraLinks = pub.extraLinks
+                        ? pub.extraLinks.map(link => `<a href="${link.url}" class="publication-link" target="_blank" rel="noopener noreferrer">&gt;${link.label}</a>`)
+                        : [
+                            pub.links.website ? `<a href="${pub.links.website}" class="publication-link" target="_blank" rel="noopener noreferrer">Website</a>` : '',
+                            pub.links.code ? `<a href="${pub.links.code}" class="publication-link" target="_blank" rel="noopener noreferrer">Code</a>` : '',
+                            pub.links.media ? `<a href="${pub.links.media}" class="publication-link" target="_blank" rel="noopener noreferrer">Media</a>` : '',
+                            pub.links.slides ? `<a href="${pub.links.slides}" class="publication-link" target="_blank" rel="noopener noreferrer">Slides</a>` : '',
+                            pub.links.video ? `<a href="${pub.links.video}" class="publication-link" target="_blank" rel="noopener noreferrer">Video</a>` : '',
+                            pub.links.data ? `<a href="${pub.links.data}" class="publication-link" target="_blank" rel="noopener noreferrer">Data</a>` : '',
+                            pub.links.model ? `<a href="${pub.links.model}" class="publication-link" target="_blank" rel="noopener noreferrer">Model</a>` : ''
+                        ].filter(Boolean);
+
+                    const extraLinksHtml = extraLinks.length > 0
+                        ? `<div class="mt-2 flex flex-wrap gap-x-6 gap-y-1.5 text-sm">${extraLinks.join('')}</div>`
+                        : '';
+
+                    const pdfActionHtml = pub.links.pdf
+                        ? `<a href="${pub.links.pdf}" class="publication-link pdf-action-link" target="_blank" rel="noopener noreferrer">PDF</a>`
+                        : '';
+                    const venueMetaHtml = [
+                        pub.ccf ? `<span class="venue-chip ccf">${pub.ccf}</span>` : '',
+                        pub.acceptanceRate ? `<span class="venue-chip rate">${pub.acceptanceRate}</span>` : ''
+                    ].filter(Boolean).join('');
+
+                    return `
+                    <article class="publication-item ${pub.type === 'Preprint' ? 'preprint' : ''}">
+                        <div class="publication-meta">
+                            <span class="pub-badge">${pub.year}</span>
+                            <span class="pub-badge type">${pub.type}</span>
+                        </div>
+                        <div class="publication-body">
+                            ${pub.award ? `<p class="publication-award">${pub.award}</p>` : ''}
+                            <h3 class="font-semibold text-xl leading-tight">${pub.title}</h3>
+                            <p class="text-slate-600 mt-1 text-sm">${renderPublicationAuthors(pub.authors)}</p>
+                            <p class="publication-venue-line text-sm">
+                                <span class="publication-venue">${pub.venue}</span>
+                                ${venueMetaHtml}
+                            </p>
+                            ${extraLinksHtml}
+                        </div>
+                        <div class="publication-actions">
+                            ${pdfActionHtml}
+                        </div>
+                    </article>
+                    `;
+                }).join('');
+            }
+
+            function populatePubFilters() {
+                const yearSelect = document.getElementById('pub-year-filter');
+                const areaSelect = document.getElementById('pub-area-filter');
+                if (!yearSelect || !areaSelect) return;
+
+                // Add Preprints option
+                const preprintOption = document.createElement('option');
+                preprintOption.value = 'preprint';
+                preprintOption.textContent = 'Preprints';
+                yearSelect.appendChild(preprintOption);
+
+                const years = [...new Set(publicationsData.filter(p => p.type !== 'Preprint').map(p => p.year))].sort((a, b) => b - a);
+                years.forEach(year => {
+                    const option = document.createElement('option');
+                    option.value = year;
+                    option.textContent = year;
+                    yearSelect.appendChild(option);
+                });
+
+                researchData.forEach(area => {
+                    const option = document.createElement('option');
+                    option.value = area.id;
+                    option.textContent = area.title;
+                    areaSelect.appendChild(option);
+                });
+            }
+
+            function renderNews() {
+                const container = document.getElementById('news-container');
+                if (!container) return;
+
+                container.innerHTML = newsData.map(item => {
+                    const titleHtml = item.url
+                        ? `<a href="${item.url}" class="news-link" target="_blank" rel="noopener noreferrer">${item.title}</a>`
+                        : item.title;
+
+                    return `
+                        <article class="news-item">
+                            <p class="news-date">${item.date}</p>
+                            <div>
+                                <h3 class="text-xl font-semibold leading-tight">${titleHtml}</h3>
+                                <p class="mt-1 text-slate-600 text-sm">${item.content}</p>
+                            </div>
+                        </article>
+                    `;
+                }).join('');
+            }
+
+            function renderSeminar() {
+                const container = document.getElementById('seminar-container');
+                if (!container) return;
+
+                container.innerHTML = seminarData.map(item => {
+                    const topicHtml = item.url
+                        ? `<a href="${item.url}" class="news-link" target="_blank" rel="noopener noreferrer">${item.topic}</a>`
+                        : item.topic;
+
+                    return `
+                        <tr>
+                            <td class="seminar-date">${item.date}</td>
+                            <td class="seminar-presenter">${item.presenter}</td>
+                            <td>
+                                <span class="seminar-topic">${topicHtml}</span>
+                                <span class="seminar-venue">${item.venue}</span>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+            }
+
+            document.getElementById('mobile-menu-button').addEventListener('click', function () {
+                const menu = document.getElementById('mobile-menu');
+                const button = this;
+                const icons = button.querySelectorAll('svg');
+                menu.classList.toggle('hidden');
+                icons[0].classList.toggle('hidden');
+                icons[1].classList.toggle('hidden');
+                const isOpen = !menu.classList.contains('hidden');
+                button.setAttribute('aria-expanded', String(isOpen));
+                button.querySelector('.sr-only').textContent = isOpen ? 'Close main menu' : 'Open main menu';
+            });
+
+            const sections = Array.from(document.querySelectorAll('section'));
+            const navLinks = Array.from(document.querySelectorAll('header a.nav-link'));
+
+            function setActiveNavLink(sectionId) {
+                navLinks.forEach(link => {
+                    const target = link.getAttribute('href');
+                    link.classList.toggle('active', Boolean(sectionId) && target === `#${sectionId}`);
+                });
+            }
+
+            function getCurrentSectionId() {
+                if (sections.length === 0) return '';
+                const probeY = Math.max(90, window.innerHeight * 0.24);
+
+                for (const section of sections) {
+                    const rect = section.getBoundingClientRect();
+                    if (rect.top <= probeY && rect.bottom > probeY) {
+                        return section.id;
+                    }
+                }
+
+                if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4) {
+                    return sections[sections.length - 1].id;
+                }
+
+                return sections[0].id;
+            }
+
+            function syncActiveNavToViewport() {
+                setActiveNavLink(getCurrentSectionId());
+            }
+
+            document.querySelectorAll('#mobile-menu a, header nav a').forEach(link => {
+                link.addEventListener('click', () => {
+                    const sectionId = link.getAttribute('href').replace('#', '');
+                    setActiveNavLink(sectionId);
+
+                    if (link.closest('#mobile-menu')) {
+                        document.getElementById('mobile-menu').classList.add('hidden');
+                        const mobileMenuButton = document.getElementById('mobile-menu-button');
+                        const icons = mobileMenuButton.querySelectorAll('svg');
+                        icons[0].classList.remove('hidden');
+                        icons[1].classList.add('hidden');
+                        mobileMenuButton.setAttribute('aria-expanded', 'false');
+                        mobileMenuButton.querySelector('.sr-only').textContent = 'Open main menu';
+                    }
+
+                    // Smooth scroll updates hash/position asynchronously; reconcile shortly after.
+                    window.setTimeout(syncActiveNavToViewport, 220);
+                });
+            });
+
+            document.getElementById('research-container').addEventListener('click', function (e) {
+                const card = e.target.closest('.research-card');
+                if (card) {
+                    const subtopicsId = `subtopics-${card.dataset.id}`;
+                    const subtopicsEl = document.getElementById(subtopicsId);
+                    subtopicsEl.classList.toggle('hidden');
+                }
+            });
+
+            document.getElementById('people-filter-controls').addEventListener('click', function (e) {
+                if (e.target.tagName === 'BUTTON') {
+                    document.querySelectorAll('#people-filter-controls .filter-btn').forEach(btn => btn.classList.remove('active'));
+                    e.target.classList.add('active');
+                    renderPeople(e.target.dataset.filter);
+                }
+            });
+
+            document.getElementById('pub-year-filter').addEventListener('change', () => {
+                renderPublications(document.getElementById('pub-year-filter').value, document.getElementById('pub-area-filter').value);
+            });
+
+            document.getElementById('pub-area-filter').addEventListener('change', () => {
+                renderPublications(document.getElementById('pub-year-filter').value, document.getElementById('pub-area-filter').value);
+            });
+
+            window.addEventListener('scroll', syncActiveNavToViewport, { passive: true });
+            window.addEventListener('resize', syncActiveNavToViewport);
+            window.addEventListener('hashchange', () => {
+                const hashSectionId = window.location.hash.replace('#', '');
+                if (hashSectionId) {
+                    setActiveNavLink(hashSectionId);
+                    window.setTimeout(syncActiveNavToViewport, 120);
+                }
+            });
+
+            // Initial Render
+            renderResearch();
+            renderPeopleFilters();
+            renderPeople();
+            populatePubFilters();
+            renderPublications();
+            renderNews();
+            renderSeminar();
+            syncActiveNavToViewport();
+        });
+    </script>
+</body>
+
+</html>
