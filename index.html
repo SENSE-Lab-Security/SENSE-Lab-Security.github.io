@@ -490,6 +490,30 @@
             margin-top: 0.25rem;
         }
 
+        .seminar-presentations-cell {
+            padding: 0 !important;
+        }
+
+        .seminar-presentations-grid {
+            display: grid;
+            grid-template-columns: minmax(9rem, 0.35fr) minmax(20rem, 1fr);
+        }
+
+        .seminar-presentation-presenter,
+        .seminar-presentation-details {
+            padding: 0.9rem 1rem;
+        }
+
+        .seminar-presentation-presenter {
+            color: var(--ink-primary);
+            font-weight: 700;
+        }
+
+        .seminar-presentation-presenter:not(:first-child),
+        .seminar-presentation-details:nth-child(n + 3) {
+            border-top: 1px solid var(--line);
+        }
+
         .text-accent {
             color: var(--accent);
         }
@@ -1068,18 +1092,37 @@
                 const container = document.getElementById('seminar-container');
                 if (!container) return;
 
-                container.innerHTML = seminarData.map(item => {
-                    const topicHtml = item.url
-                        ? `<a href="${item.url}" class="news-link" target="_blank" rel="noopener noreferrer">${item.topic}</a>`
-                        : item.topic;
+                const seminarsByDate = Array.from(seminarData.reduce((groups, item) => {
+                    if (!groups.has(item.date)) groups.set(item.date, []);
+                    groups.get(item.date).push(item);
+                    return groups;
+                }, new Map()));
+
+                container.innerHTML = seminarsByDate.map(([date, presentations]) => {
+                    const presentationsHtml = presentations.map(item => {
+                        const topicHtml = item.url
+                            ? `<a href="${item.url}" class="news-link" target="_blank" rel="noopener noreferrer">${item.topic}</a>`
+                            : item.topic;
+                        const venueHtml = item.venue
+                            ? `<span class="seminar-venue">${item.venue}</span>`
+                            : '';
+
+                        return `
+                            <div class="seminar-presentation-presenter">${item.presenter}</div>
+                            <div class="seminar-presentation-details">
+                                <span class="seminar-topic">${topicHtml}</span>
+                                ${venueHtml}
+                            </div>
+                        `;
+                    }).join('');
 
                     return `
                         <tr>
-                            <td class="seminar-date">${item.date}</td>
-                            <td class="seminar-presenter">${item.presenter}</td>
-                            <td>
-                                <span class="seminar-topic">${topicHtml}</span>
-                                <span class="seminar-venue">${item.venue}</span>
+                            <td class="seminar-date">${date}</td>
+                            <td class="seminar-presentations-cell" colspan="2">
+                                <div class="seminar-presentations-grid">
+                                    ${presentationsHtml}
+                                </div>
                             </td>
                         </tr>
                     `;

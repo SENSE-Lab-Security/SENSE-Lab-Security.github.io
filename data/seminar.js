@@ -16,16 +16,16 @@ const seminarData = [
     },
     {
         date: 'July 31',
-        presenter: 'Chengfan Sheng',
-        topic: 'TBA',
-        venue: 'TBA',
+        presenter: 'Pai Zheng',
+        topic: 'Side-channel Inference of User Activities in AR/VR Using GPU Profiling',
+        venue: 'NDSS 2026',
         url: ''
     },
     {
         date: 'July 31',
-        presenter: 'Pai Zheng',
-        topic: 'TBA',
-        venue: 'TBA',
+        presenter: 'Yucheng Zheng',
+        topic: 'Agentic Honeypot',
+        venue: '',
         url: ''
     }
 ];
