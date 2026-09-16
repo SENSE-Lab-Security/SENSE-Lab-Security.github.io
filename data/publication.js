@@ -1,6 +1,36 @@
 const publicationsData = [
     {
         year: 2026,
+        type: 'Preprint',
+        area: ['software-ai-security'],
+        title: 'Can We Stop The Ads? Taxonomy and Characterization of Smartphone Splash Ads and Existing Countermeasures',
+        authors: 'Shuhao Zhang, Xinyu Liu, Ziyu Shao, Yuqing Yang, Yan Long',
+        venue: 'arXiv 2026',
+        links: {
+            pdf: 'https://arxiv.org/pdf/2609.17316',
+            website: 'https://arxiv.org/abs/2609.17316'
+        },
+        extraLinks: [
+            { label: 'arXiv', url: 'https://arxiv.org/abs/2609.17316' }
+        ]
+    },
+    {
+        year: 2026,
+        type: 'Preprint',
+        area: ['multimodal-ai-security'],
+        title: 'Devil in the Lens: Analyzing and Defending Physical Prompt Injection Against Vision-Language Models on Wearable Devices',
+        authors: 'Yaxin Li, Hao Wang, Yanda Shao, Shuhao Zhang, Yan Long',
+        venue: 'arXiv 2026',
+        links: {
+            pdf: 'https://arxiv.org/pdf/2607.10269',
+            website: 'https://arxiv.org/abs/2607.10269'
+        },
+        extraLinks: [
+            { label: 'arXiv', url: 'https://arxiv.org/abs/2607.10269' }
+        ]
+    },
+    {
+        year: 2026,
         type: 'Conference',
         area: ['multimodal-ai-security', 'physical-sensing-security'],
         title: 'Caught on Camera: Toward Evaluating and Defending On-screen Deepfakes With Mobile and Wearable Camera Devices',
@@ -8,7 +38,7 @@ const publicationsData = [
         venue: 'RAID 2026',
         ccf: 'CCF-B',
         acceptanceRate: 'Acceptance rate 19%',
-        links: {}
+        links: { pdf: 'files/raid26.pdf' }
     },
     {
         year: 2026,

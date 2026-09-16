@@ -135,13 +135,13 @@ const peopleGroups = [
         photo: 'images/people/yuchen-zhang.webp'
     },
     {
-        lastName: 'Sheng',
-        firstName: 'Chenfan',
+        lastName: 'Liu',
+        firstName: 'Xinyu',
         role: 'Research Intern',
         year: 'Since 2026',
-        institution: 'MS at the University of Sydney',
-        researchInterest: 'Software & AI Security',
-        photo: 'images/people/hacker-placeholder.webp'
+        institution: 'UG at Jiangsu Normal University',
+        researchInterest: 'Sensing & AI Security',
+        photo: 'images/people/xinyu-liu.webp'
     },
     {
         lastName: 'Zhang',
@@ -160,6 +160,15 @@ const peopleGroups = [
         institution: 'UG at Xiamen University Malaysia',
         researchInterest: 'Software & AI Security',
         photo: 'images/people/yucheng-zheng.webp'
+    },
+    {
+        lastName: 'Qian',
+        firstName: 'Cheng',
+        role: 'Research Intern',
+        year: 'Since 2026',
+        institution: 'MS from Beihang University',
+        researchInterest: 'Software & AI Security',
+        photo: 'images/people/cheng-qian.webp'
             }
         ]
     },

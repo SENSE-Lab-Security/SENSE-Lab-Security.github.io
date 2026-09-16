@@ -27,5 +27,19 @@ const seminarData = [
         topic: 'Agentic Honeypot',
         venue: '',
         url: ''
+    },
+    {
+        date: 'Aug 21',
+        presenter: 'Yaxin Li',
+        topic: 'Network-Level Prompt and Trait Leakage in Local Research Agents',
+        venue: 'USENIX Security 2026',
+        url: ''
+    },
+    {
+        date: 'Sep 11',
+        presenter: 'Ziyu Shao',
+        topic: 'Mobile Sensor Security',
+        venue: '',
+        url: ''
     }
 ];
